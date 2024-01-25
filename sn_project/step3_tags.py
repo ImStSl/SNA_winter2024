@@ -3,9 +3,6 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
 from collections import Counter
-import nltk
-
-
 
 df = pd.read_csv('../dataset/usdataset.csv', low_memory=False)
 

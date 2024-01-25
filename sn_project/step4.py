@@ -1,6 +1,5 @@
 import pandas as pd
 import networkx as nx
-import matplotlib.pyplot as plt
 import pickle
 
 # Function to build or load the graph
@@ -42,7 +41,6 @@ def build_graph():
         likes = row['likes']
         dislikes = row['dislikes']
 
-        # You can customize how you want to calculate the edge weight
         weight = views + 4 * comments + 2 * likes - 2 * dislikes
 
         G.add_edge(channel_id, video_id, weight=weight)
@@ -52,7 +50,6 @@ def build_graph():
 # Build or load the undirected graph
 G = build_or_load_graph()
 
-# Calculate centrality measures on the entire graph G
 degree_centrality = nx.degree_centrality(G)
 weighted_degree_centrality = dict(G.degree(weight='weight'))
 weighted_eigenvector_centrality = nx.eigenvector_centrality_numpy(G, weight='weight')

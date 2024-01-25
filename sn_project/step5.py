@@ -32,3 +32,4 @@ plt.figure(figsize=(16, 12))
 nx.draw(G, pos, node_color=[color_map[node] for node in G.nodes], with_labels=False, node_size=20, cmap='viridis', alpha=0.7)
 plt.title('Community Detection Visualization')
 plt.show()
+

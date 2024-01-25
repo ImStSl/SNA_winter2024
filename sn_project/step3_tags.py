@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
 from collections import Counter
 
-df = pd.read_csv('../dataset/usdataset.csv', low_memory=False)
+df = pd.read_csv('../dataset/dataset.csv', low_memory=False)
 
 # Sample data
 tags_list = df['tags'].dropna().tolist()

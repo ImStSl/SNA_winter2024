@@ -4,7 +4,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 
-df = pd.read_csv('../dataset/usdataset.csv', low_memory=False)
+df = pd.read_csv('../dataset/dataset.csv', low_memory=False)
 
 # Sample data
 titles_list = df['title'].dropna().tolist()

@@ -19,7 +19,7 @@ def build_or_load_graph():
 # Function to build the undirected graph
 def build_graph():
     # Load the dataset with proper handling of mixed types
-    df = pd.read_csv('../dataset/usdataset.csv', low_memory=False)
+    df = pd.read_csv('../dataset/dataset.csv', low_memory=False)
 
     # Create an undirected graph
     G = nx.Graph()

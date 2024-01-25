@@ -6,12 +6,10 @@ import pickle
 # Function to build or load the graph
 def build_or_load_graph():
     try:
-        # Try to load the graph from a saved file
         with open('undirected_graph.pkl', 'rb') as file:
             G = pickle.load(file)
         print("Graph loaded from file.")
     except FileNotFoundError:
-        # If the file doesn't exist, build the graph and save it
         G = build_graph()
         with open('undirected_graph.pkl', 'wb') as file:
             pickle.dump(G, file)
@@ -38,20 +36,13 @@ def build_graph():
                 ):
                     G.add_edge(row1['video_id'], row2['video_id'])
 
-    # Print or visualize the graph
-    """print("Nodes:", G.nodes())
-    print("Edges:", G.edges())"""
-
     return G
 
 # Build or load the undirected graph
 undirected_graph = build_or_load_graph()
 
-# Print some information about the graph
 print(f"Number of nodes: {len(undirected_graph.nodes)}")
 print(f"Number of edges: {len(undirected_graph.edges)}")
-
-# Assuming 'undirected_graph' is the undirected graph you have built
 
 # Filter out nodes with 'nan' values
 valid_nodes = [node for node in undirected_graph.nodes if isinstance(node, str)]
@@ -90,3 +81,8 @@ top_nodes_pagerank = sorted(pagerank, key=pagerank.get, reverse=True)[:5]
 print("\nTop 5 nodes by PageRank:")
 for node in top_nodes_pagerank:
     print(f"Node: {node}, Title: {undirected_graph.nodes[node]['title']}, PageRank: {pagerank[node]}")
+
+# Plot the graph
+pos = nx.spring_layout(undirected_graph)
+nx.draw(undirected_graph, pos, with_labels=False, node_size=10, alpha=0.6)
+plt.show()

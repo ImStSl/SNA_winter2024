@@ -10,7 +10,6 @@ import re
 
 def load_graph():
     try:
-        # Try to load the graph from a saved file
         with open('undirected_graph.pkl', 'rb') as file:
             G = pickle.load(file)
         print("Graph loaded from file.")
@@ -29,7 +28,6 @@ G = load_graph()
 # Perform community detection using the Louvain method
 communities = list(community.greedy_modularity_communities(G))
 
-# Print the communities with video titles
 for i, community in enumerate(communities):
     titles = [G.nodes[video_id].get('title', f'Title not available for {video_id}') for video_id in community]
     print(f"Community {i + 1}: {titles}")
@@ -49,7 +47,7 @@ plt.show()
 print('***************************************************')
 
 df = pd.read_csv('../dataset/dataset.csv', low_memory=False)
-community_df = df[df['video_id'].isin(communities[2])].copy()  # Create a copy of the DataFrame
+community_df = df[df['video_id'].isin(communities[0])].copy()  # Create a copy of the DataFrame
 
 tags_list = community_df['tags'].dropna().tolist()
 
@@ -68,7 +66,7 @@ cluster_assignments = kmeans.fit_predict(tags_vectors)
 result_df = community_df.copy()
 result_df['cluster'] = cluster_assignments
 
-# Print or analyze the clusters
+
 for cluster_id in range(num_clusters):
     cluster_videos = result_df[result_df['cluster'] == cluster_id]['title']
     print(f"Cluster {cluster_id+1} Videos:")

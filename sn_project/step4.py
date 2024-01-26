@@ -2,15 +2,15 @@ import pandas as pd
 import networkx as nx
 import pickle
 from tabulate import tabulate
+
+
 # Function to build or load the graph
 def build_or_load_graph():
     try:
-        # Try to load the graph from a saved file
         with open('undirected_weighted_graph.pkl', 'rb') as file:
             G = pickle.load(file)
         print("Graph loaded from file.")
     except FileNotFoundError:
-        # If the file doesn't exist, build the graph and save it
         G = build_graph()
         with open('undirected_weighted_graph.pkl', 'wb') as file:
             pickle.dump(G, file)
@@ -50,7 +50,7 @@ def display_results(top_channels, centrality_dict, G):
 
     for channel in top_channels:
         # Skip invalid or unexpected values in 'channelId'
-        if pd.notna(channel) and str(channel) != '#NAME?':
+        if pd.notna(channel):
             title = G.nodes[channel].get('title', 'Title not available')
             degree = G.degree(channel)
             w_degree = centrality_dict[channel]

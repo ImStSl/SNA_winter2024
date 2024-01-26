@@ -9,7 +9,6 @@ df = pd.read_csv('../dataset/dataset.csv', low_memory=False)
 # Sample data
 tags_list = df['tags'].dropna().tolist()
 
-# Combine tags into a single string
 tags_content = ' '.join(tags_list)
 
 # Tokenize the content
@@ -45,10 +44,7 @@ positive_keywords = 0
 negative_keywords = 0
 neutral_keywords = 0
 for keyword in top_keywords:
-    # Analyze sentiment for each keyword
     sentiment_score = sia.polarity_scores(keyword)['compound']
-    print(keyword, sentiment_score)
-    # Categorize as positive or negative based on sentiment score
     if sentiment_score >= 0.05:
         positive_keywords += 1
     elif sentiment_score <= -0.05:
@@ -56,7 +52,7 @@ for keyword in top_keywords:
     else:
         neutral_keywords += 1
 
-# Print results
+
 print(f"Top 25 Keywords (excluding stop words): {top_keywords}")
 print(f"Positive Keywords: {positive_keywords}")
 print(f"Negative Keywords: {negative_keywords}")
